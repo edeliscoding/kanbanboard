@@ -3,6 +3,9 @@ import "./App.css";
 import TaskCard from "./components/TaskCard";
 import { Status, statuses, Task } from "./utils/data-tasks";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [currentlyHoveringOver, setCurrentlyHoveringOver] =
@@ -17,7 +20,7 @@ function App() {
   });
 
   useEffect(() => {
-    fetch("http://localhost:3000/tasks")
+    fetch(`${API_BASE_URL}/tasks`)
       .then((res) => res.json())
       .then((data) => {
         setTasks(data);
@@ -25,7 +28,7 @@ function App() {
   }, []);
 
   const updateTask = (task: Task) => {
-    fetch(`http://localhost:3000/tasks/${task.id}`, {
+    fetch(`${API_BASE_URL}/tasks/${task.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
