@@ -20,7 +20,7 @@ function App() {
   });
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/tasks`)
+    fetch(`${API_BASE_URL}`)
       .then((res) => res.json())
       .then((data) => {
         setTasks(data);
@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   const updateTask = (task: Task) => {
-    fetch(`${API_BASE_URL}/tasks/${task.id}`, {
+    fetch(`${API_BASE_URL}/${task.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
